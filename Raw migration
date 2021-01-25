@@ -52,9 +52,22 @@ Schema::create('order', function (Blueprint $table) {
 
 Schema::create('order', function (Blueprint $table) {
     $table->id();
-    $table->dateTime('dateOrder');
-    $table->double('totalPrice');
-    $table->int('idClient');
+    $table->foreignId('idOrder');
+    $table->foreignId('idDish');
     $table->timestamps();
 });
+
+
+=============================
+class UserTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => Str::random(10).'@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+    }
+}
 
