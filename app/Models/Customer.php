@@ -24,4 +24,6 @@ class Customer
         "updated_at"
     ];
 
+    protected $guarded = [];
+
 }

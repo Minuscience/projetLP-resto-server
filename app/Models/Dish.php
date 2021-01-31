@@ -16,4 +16,6 @@ class Dish
         "imageURL",
         "updated_at"
     ];
+
+    protected $guarded = [];
 }

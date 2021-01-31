@@ -10,4 +10,6 @@ class OrderLine
         "idOrder",
         "idDish"
     ];
+
+    protected $guarded = [];
 }

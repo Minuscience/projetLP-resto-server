@@ -12,4 +12,6 @@ class Order
         "idCustomer",
         "updated_at"
     ];
+
+    protected $guarded = [];
 }
