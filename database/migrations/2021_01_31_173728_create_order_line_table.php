@@ -15,8 +15,8 @@ class CreateOrderLineTable extends Migration
     {
         Schema::create('order_line', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor('Order','idOrder');
-            $table->foreignIdFor('Dish','idDish');
+            $table->foreignId('idOrder');
+            $table->foreignId('idDish');
             $table->timestamps();
         });
     }
