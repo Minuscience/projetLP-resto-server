@@ -17,11 +17,12 @@ class CustomerSeeder extends Seeder
     public function run()
     {
         for ($i = 0 ; $i <= 10; $i++) {
-            DB::table('users')->insert([
+            DB::table('customer')->insert([
                 'name' => Str::random(10),
+                'firstname' => Str::random(10),
                 'lastname' => Str::random(10),
                 'email' => Str::random(10) . '@gmail.com',
-                'dateIfBirth' => Carbon::create(1990, rand(1, 12), rand(1, 28), 0, 0),
+                'dateOfBirth' => Carbon::create(1990, rand(1, 12), rand(1, 28), 0, 0),
                 'extraNapkins' => (rand(0, 1) == 1),
                 'frequentRefill' => (rand(0, 1) == 1),
             ]);

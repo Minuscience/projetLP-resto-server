@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Dish;
+use http\Message\Body;
+use Illuminate\Support\Facades\Response;
 use Laravel\Lumen\Http\Request;
 class DishController extends Controller
 {
@@ -18,9 +21,18 @@ class DishController extends Controller
 
     //
 
-    public function showProfile($id)
+
+
+    public function getAll()
     {
-        $result ='';
-        return json_encode($result);
+//        $dishes = Dish::all();
+//        $result ="
+//        'status' : 200,
+//        'data' : " . $dishes ;
+
+        var_dump(Dish::all());
+//        return json_encode($result);
+
+        return json_decode(Dish::all());
     }
 }

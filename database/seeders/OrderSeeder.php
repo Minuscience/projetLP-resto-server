@@ -49,7 +49,7 @@ class OrderSeeder extends Seeder
             }
 
         }*/
-        $dish = new Dish();
+//        $dish = new Dish();
 
     }
 }
