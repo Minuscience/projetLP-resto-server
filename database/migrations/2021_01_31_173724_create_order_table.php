@@ -18,6 +18,7 @@ class CreateOrderTable extends Migration
             $table->dateTime('dateOrder');
             $table->double('totalPrice');
             $table->foreignId( 'idCustomer');
+            $table->boolean( 'current');
             $table->timestamps();
         });
     }

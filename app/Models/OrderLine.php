@@ -4,7 +4,9 @@
 namespace App\Models;
 
 
-class OrderLine
+use Illuminate\Database\Eloquent\Model;
+
+class OrderLine extends Model
 {
     protected $fillable = [
         "idOrder",

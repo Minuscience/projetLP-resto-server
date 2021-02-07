@@ -4,7 +4,9 @@
 namespace App\Models;
 
 
-class Customer
+use Illuminate\Database\Eloquent\Model;
+
+class Customer extends Model
 {
 
 

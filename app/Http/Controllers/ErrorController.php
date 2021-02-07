@@ -19,8 +19,9 @@ class ErrorController extends Controller
     public function isEmpty(Request $request)
     {
         $result = "
-            error : 204 No Content \n
-            path : " . $request->path() . "\n";
+            'code' : '200', \n
+            'error' : 'No Content', \n
+            'path' : '" . $request->path() . "'\n";
         return json_encode($result);
     }
     //

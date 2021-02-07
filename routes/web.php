@@ -59,9 +59,23 @@ $router->group(['prefix' => 'dish'], function () use ($router) {
 });
 $router->group(['prefix' => 'order'], function () use ($router) {
     $router->get('/', ['uses' => 'OrderController@getAll']);
+    //create an order => OK || KO
+    $router->post('/', ['uses' => 'OrderController@addOrder']);
     $router->get('/{id}', ['uses' => 'OrderController@getOne']);
-    $router->get('/currentOrder', ['uses' => 'OrderController@currentOrder']);
-    $router->post('/{idCustomer}/{idOrder}/{idDish}', ['uses' => 'OrderController@addDishToOne']);
-    $router->post('/{idCustomer}/{idOrder}/{idDish}', ['uses' => 'OrderController@removeDishToOne']);
+
+    //TODO : main command
+    $router->get('/currentOrder', ['uses' => 'OrderController@currentOrder']); //find or create
+    $router->post('/{idCustomer}/{idDish}', ['uses' => 'OrderController@addDish']);
+    $router->post('/{idCustomer}/endCommand', ['uses' => 'OrderController@removeOneDish']);
+
     $router->post('/cancelOrder', ['uses' => 'OrderController@cancelOrder']);
+//    $router->post('/{idCustomer}/{idOrder}/{idDish}', ['uses' => 'OrderController@removeOneDish']);
+//    $router->post('/{idCustomer}/', ['uses' => 'OrderController@removeOneDish']);
 });
+/*
+prfix url :order
+1) post url:"/" crée une comande et archive la dernière commande || reset
+2) get url:"/currentOrder" prend la denière comande et en crée si n'existe pas  || last or create
+    -> return code + idOrder
+3) post url:"/{idCustomer}/{idOrder}/{idDish}" add one dish
+*/
