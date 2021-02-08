@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Customer;
 use App\Models\Dish;
 use App\Models\User;
 use Laravel\Lumen\Http\Request;
@@ -17,11 +18,6 @@ class CustomerController extends Controller
     public function __construct()
     {
         //
-    }
-
-    public function getAll()
-    {
-        return null;
     }
 
 
@@ -40,10 +36,12 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function showProfiles(request $request)
+    public function getAll()
     {
-        $result = '';
-        return json_encode($result);
+        return response()->json([
+            'status' => 200,
+            'values' => Customer::all(),
+        ]);
     }
     //
 }

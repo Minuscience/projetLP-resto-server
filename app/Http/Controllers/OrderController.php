@@ -29,7 +29,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function addDOrder($userId)
+    public function last($userId)
     {
         $lastOrder = Order::where('current', '=', true);
 
