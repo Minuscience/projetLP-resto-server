@@ -49,11 +49,25 @@ $router->get('/key', function() {
 });
 
 
-
-$router->get('/dish', function() {
+$router->get('dish/all', 'DishController@getAll');
+//$router->get('/dish', function() {
 //    return Dish::all();
-    return json_encode(Dish::all());
-});
+//    return json_encode(Dish::all());
+//    return response()->json([
+//        'status' => 200,
+//        'values' => Dish::all(),
+//    ]);
+//});
+
+
+//$router->get('/user/{id}', function() use ($id) {
+//    return Dish::all();
+//    return json_encode(Dish::all());
+//    return response()->json([
+//        'status' => 200,
+//        'values' => \App\Models\User::where('id', '=', $id)->first(),
+//    ]);
+//});
 
 //$router->get('/', function () use ($router) {
 ////    return $router->app->version();

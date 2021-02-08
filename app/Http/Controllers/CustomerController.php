@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Dish;
+use App\Models\User;
 use Laravel\Lumen\Http\Request;
 
 class CustomerController extends Controller
@@ -19,30 +21,26 @@ class CustomerController extends Controller
 
     public function getAll()
     {
-        $result = '';
-        return json_encode($result);
+        return null;
     }
 
 
-    public function showProfile(request $request)
+    public function showProfile($email)
     {
-        $result = '';
-        return json_encode($result);
+        $user = User::where('email',$email) -> first();
+        if (isset($user)){
+            return response()->json([
+                'status' => 200,
+                'values' => Dish::all(),
+            ]);
+        }
+        return response()->json([
+            'status' => 200,
+            'values' => Dish::all(),
+        ]);
     }
 
-    public function showProfile(request $request)
-    {
-        $result = '';
-        return json_encode($result);
-    }
-
-    public function showProfile(request $request)
-    {
-        $result = '';
-        return json_encode($result);
-    }
-
-    public function showProfile(request $request)
+    public function showProfiles(request $request)
     {
         $result = '';
         return json_encode($result);

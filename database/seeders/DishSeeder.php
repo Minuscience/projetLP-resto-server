@@ -29,7 +29,7 @@ class DishSeeder extends Seeder
             DB::table('dish')->insert([
                 'name' => Str::random(10),
                 'description' => $ipsum,
-                'price' => (float)(rand(0, 1000) / 100),
+                'price' => (float)(rand(0, 100000) / 100),
                 'calories' => rand(0, 3000),
                 'proteins' => rand(0, 5),
                 'carbs' => rand(0, 1),

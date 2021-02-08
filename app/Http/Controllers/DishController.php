@@ -25,14 +25,9 @@ class DishController extends Controller
 
     public function getAll()
     {
-//        $dishes = Dish::all();
-//        $result ="
-//        'status' : 200,
-//        'data' : " . $dishes ;
-
-        var_dump(Dish::all());
-//        return json_encode($result);
-
-        return json_decode(Dish::all());
+        return response()->json([
+            'status' => 200,
+            'values' => Dish::all()
+        ]);
     }
 }
