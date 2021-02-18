@@ -4,4 +4,6 @@
 #php artisan make:migration create_order_table
 #php artisan make:migration create_order_line_table
 
-php artisan migrate
+php artisan migrate:fresh
+php artisan db:seed
+

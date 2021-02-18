@@ -31,7 +31,7 @@ class OrderController extends Controller
 
     public function last($userId)
     {
-        $lastOrder = Order::where('current', '=', true);
+        $lastOrder = Order::where('idCustomer', $userId);
 
         if (!isset($lastOrder)) {
             $order = new Order();
