@@ -52,6 +52,7 @@ $router->get('/key', function() {
 $router->get('dish/all', 'DishController@getAll');
 $router->get('customer/all', 'CustomerController@getAll');
 $router->get('customer/one/{id}', 'CustomerController@getOne');
+$router->get('customer/update/{id}', 'CustomerController@update');
 $router->get('order/{userId}/last', 'OrderController@last');
 $router->post('order/add', 'OrderController@addOrder');
 //$router->get('/dish', function() {

@@ -56,49 +56,54 @@ class OrderController extends Controller
 
     public function addOrder(Request $request)
     {
-        $value = json_decode($request);
+        $values = json_decode($request->getContent(), true);
+//        $values = $request->getContent();
 
-        return $value;
-        $customer = $value->idCustomer;
-        $dishesIds = explode(" ,", idDishes);
 
-        $totalPrice = 0;
-        $lastOrderId = null;
+        $customer =  $values['idCustomer'];
+        $dishesIds = explode(" ,", $values['idDishes']);
+
+//        return response($values)
+//            ->header('Content-Type', 'application/json');
 
         foreach ($dishesIds as $id) {
-            $current = Dish::where('id', '=', $id);
+            $current = Dish::find($id);
             $totalPrice += $current->price;
         }
 
+
+        $now = new \DateTime();
+
         $currentOrder = new Order();
+
+        $currentOrder->dateOrder = $now;
         $currentOrder->current = true;
 
-        $currentOrderId = 0;
         $LastOrder = Order::where('idCustomer', '=', $customer)->last;
 
         if (isset($lastOrder)) {
             $lastOrder->current = false;
             $lastOrder->save;
-            $currentOrderId = $lastOrder->id + 1;
         }
-        $currentOrder->id = $currentOrderId;
-        $currentOrder->dateOrder = new \DateTime();
+
         $currentOrder->totalPrice = $this->totalPrice($dishesIds);
         $currentOrder->idCustomer = $customer;
         $currentOrder->current = true;
         $currentOrder->save();
 
-        $this->addOrderLine($currentOrderId,$dishesIds);
+        $currentOrder = Order::where('dateOrder', $now);
+        $currentOrderId = $currentOrder->id;
+        $this->addOrderLine($currentOrderId, $dishesIds);
 
-        return response($currentOrder)
+        return response("your order is save")
             ->header('Content-Type', 'application/json');
     }
 
     public function totalPrice($dishesId)
     {
         $total = null;
-        foreach ($dishesId as $idDishes) {
-            $dish = Dish::where("id", "=", $idDishes);
+        foreach ($dishesId as $id) {
+            $dish = Dish::find($id);
             if (isset($dish))
                 $total += $dish->price;
         }
@@ -108,10 +113,10 @@ class OrderController extends Controller
 
     public function addOrderLine($idOrder, $dishesId)
     {
-        foreach ($dishesId as $idDishes) {
+        foreach ($dishesId as $id) {
             $line = new OrderLine();
             $line->idOrder = $idOrder;
-            $line->idDish = $idDishes;
+            $line->idDish = $id;
         }
 
     }

@@ -47,5 +47,18 @@ class CustomerController extends Controller
         return response(Customer::find($id))
             ->header('Content-Type', 'application/json');
     }
-    //
+
+    public function update(Request $request, $id)
+    {
+        $values = json_decode($request->getContent(), true);
+        $user = Customer::find($id);
+        $user->name =$values["name"];
+        $user->firstaname =$values["firstname"];
+        $user->lastname =$values["lastname"];
+        $user->email =$values["email"];
+        $user->dateOfBirth =$values["dateOfBirth"];
+        $user->extraNapkins =$values["extraNapkins"];
+        $user->frequentRefill =$values["frequentRefill"];
+    }
+
 }
