@@ -57,9 +57,10 @@ class CustomerController extends Controller
         $user->firstaname =$values["firstname"];
         $user->lastname =$values["lastname"];
         $user->email =$values["email"];
-        $user->dateOfBirth =$values["dateOfBirth"];
-        $user->extraNapkins =$values["extraNapkins"];
-        $user->frequentRefill =$values["frequentRefill"];
+        $user->dateOfBirth = $values["dateOfBirth"];
+        $user->extraNapkins = (bool)$values["extraNapkins"];
+        $user->frequentRefill = (bool) $values["frequentRefill"];
+        $user->save();
     }
 
 }
