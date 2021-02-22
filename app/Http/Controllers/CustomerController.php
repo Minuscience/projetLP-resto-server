@@ -38,10 +38,14 @@ class CustomerController extends Controller
 
     public function getAll()
     {
-        return response()->json([
-            'status' => 200,
-            'values' => Customer::all(),
-        ]);
+        return response(Customer::all(), 200)
+            ->header('Content-Type', 'application/json');
+    }
+
+    public function getOne($id)
+    {
+        return response(Customer::find($id))
+            ->header('Content-Type', 'application/json');
     }
     //
 }

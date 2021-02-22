@@ -25,9 +25,7 @@ class DishController extends Controller
 
     public function getAll()
     {
-        return response()->json([
-            'status' => 200,
-            'values' => Dish::all()
-        ]);
+        return response(Dish::all())
+        ->header('Content-Type', 'application/json');
     }
 }
