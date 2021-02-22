@@ -61,13 +61,14 @@ class OrderController extends Controller
 
 
         $customer =  $values['idCustomer'];
-        $dishesIds = explode(" ,", $values['idDishes']);
+        $dishesIds = explode(", ", $values['idDishes']);
 
 //        return response($values)
 //            ->header('Content-Type', 'application/json');
 
+        $totalPrice = 0;
         foreach ($dishesIds as $id) {
-            $current = Dish::find($id);
+            $current = Dish::find((int)$id);
             $totalPrice += $current->price;
         }
 
@@ -79,7 +80,7 @@ class OrderController extends Controller
         $currentOrder->dateOrder = $now;
         $currentOrder->current = true;
 
-        $LastOrder = Order::where('idCustomer', '=', $customer)->last;
+        $LastOrder = Order::where('idCustomer', '=', $customer)->latest();
 
         if (isset($lastOrder)) {
             $lastOrder->current = false;
@@ -91,7 +92,7 @@ class OrderController extends Controller
         $currentOrder->current = true;
         $currentOrder->save();
 
-        $currentOrder = Order::where('dateOrder', $now);
+        $currentOrder = Order::where('dateOrder', $now)->first();
         $currentOrderId = $currentOrder->id;
         $this->addOrderLine($currentOrderId, $dishesIds);
 
@@ -101,7 +102,7 @@ class OrderController extends Controller
 
     public function totalPrice($dishesId)
     {
-        $total = null;
+        $total = 0;
         foreach ($dishesId as $id) {
             $dish = Dish::find($id);
             if (isset($dish))
@@ -117,6 +118,7 @@ class OrderController extends Controller
             $line = new OrderLine();
             $line->idOrder = $idOrder;
             $line->idDish = $id;
+            $line->save();
         }
 
     }

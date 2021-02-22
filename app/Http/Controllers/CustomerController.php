@@ -52,7 +52,8 @@ class CustomerController extends Controller
     {
         $values = json_decode($request->getContent(), true);
         $user = Customer::find($id);
-        $user->name =$values["name"];
+        if(!isset($user))
+            return "no user";
         $user->firstaname =$values["firstname"];
         $user->lastname =$values["lastname"];
         $user->email =$values["email"];
